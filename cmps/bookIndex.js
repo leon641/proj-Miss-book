@@ -26,7 +26,7 @@ export default {
         return {
             books: null,
             selectedBook: null,
-            filterBy: {},
+            filterBy: {bookName: '', bookPrice: 100},
         }
     },
     methods: {
@@ -50,7 +50,7 @@ export default {
     computed: {
         filteredBooks() {
             const regex = new RegExp(this.filterBy.bookName, 'i')
-            return this.books.filter(book => regex.test(book.bookName))
+            return this.books.filter(book => regex.test(book.title) && this.filterBy.bookPrice >= book.listPrice.amount)
         }
     },
     created() {
