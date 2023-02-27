@@ -20,7 +20,7 @@ p {
 }
 
 a {
-    text-decoration: none;
+    /* text-decoration: none; */
     color: unset;
 }
 
@@ -37,4 +37,9 @@ object {
 
 .debug * {
     outline: 1px solid gold;
+}
+
+.router-link-active {
+    text-decoration: overline;
+    color: green;
 }

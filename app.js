@@ -1,37 +1,30 @@
 const { createApp } = Vue
 
+import { router } from './routes.js'
+
 import AppHeader from './cmps/AppHeader.js'
 import AppFooter from './cmps/AppFooter.js'
 
-import bookIndex from './cmps/bookIndex.js'
-
-import HomePage from './pages/HomePage.js'
-import AboutPage from './pages/AboutPage.js'
-
 const options = {
-    template: `
+  template: `
         <section class="container">
             <AppHeader @setRoute="route = $event"/>
             <main class="router-view">
-                <HomePage v-if="route === 'HomePage'"/>
-                <bookIndex v-if="route === 'bookIndex'"/>
-                <AboutPage v-if="route === 'AboutPage'"/>
+                
+            <RouterView/>
             </main>
             <AppFooter />
         </section>
     `,
-    data() {
-        return {
-            route: 'HomePage',
-        }
-    },
-    components: {
-        AppHeader,
-        AppFooter,
-        bookIndex,
-        HomePage,
-        AboutPage,
-    }
+  data() {
+    return {}
+  },
+  components: {
+    AppHeader,
+    AppFooter,
+  },
 }
 const app = createApp(options)
+
+app.use(router)
 app.mount('#app')
