@@ -2,6 +2,7 @@ import { bookService } from '../services/book.service.js'
 
 import bookFilter from '../cmps/bookFilter.js'
 import bookList from '../cmps/bookList.js'
+import {eventBusService} from '../services/event-bus.service.js'
 
 
 export default {
@@ -33,6 +34,7 @@ export default {
                 .then(() => {
                     const idx = this.books.findIndex(book => book.id === bookId)
                     this.books.splice(idx, 1)
+                    eventBusService.emit('show-msg', {txt: 'Book removed', type: 'success'})
                 })
         },
        

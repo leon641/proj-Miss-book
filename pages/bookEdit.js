@@ -1,4 +1,5 @@
 import { bookService } from '../services/book.service.js'
+import { eventBusService } from '../services/event-bus.service.js'
 
 export default {
   template: `
@@ -25,6 +26,7 @@ export default {
   methods: {
     save() {
       bookService.save(this.book).then((savedBook) => {
+        eventBusService.emit('show-msg', {txt: 'Book saved', type: 'success'})
         this.$router.push('/book')
       })
     },

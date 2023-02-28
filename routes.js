@@ -1,8 +1,10 @@
 import HomePage from './pages/HomePage.js'
-import AboutPage from './pages/AboutPage.js'
+import AboutPage, {aboutBooks} from './pages/AboutPage.js'
 import BookIndex from './pages/bookIndex.js'
 import BookDetails from './pages/bookDetails.js'
 import BookEdit from './pages/bookEdit.js'
+
+
 
 
 const { createRouter, createWebHashHistory } = VueRouter
@@ -19,7 +21,14 @@ const options = {
     },
     {
         path:'/about',
-        component:AboutPage
+        component:AboutPage,
+        children: [
+          {
+            path:'books',
+            component:aboutBooks
+        },
+        
+        ]
     },
     {
         path:'/book/:bookId',
@@ -29,6 +38,10 @@ const options = {
         path:'/book/edit/:bookId?',
         component:BookEdit
     },
+    {
+      path: '/:catchAll(.*)',
+      component: BookIndex
+    }
   
   ],
 }
