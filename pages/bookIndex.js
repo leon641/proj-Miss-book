@@ -8,7 +8,8 @@ import {eventBusService} from '../services/event-bus.service.js'
 export default {
     template: `
         <section class="book-index">
-            <RouterLink to="/book/edit">Add a book</RouterLink>
+            <RouterLink to="/book/edit">Add a book</RouterLink> |
+            <RouterLink to="/book/add">Add a book from google</RouterLink> |
             <bookFilter @filter="setFilterBy"/>
             <bookList 
                 :books="filteredBooks" 

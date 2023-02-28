@@ -3,6 +3,7 @@ import AboutPage, {aboutBooks} from './pages/AboutPage.js'
 import BookIndex from './pages/bookIndex.js'
 import BookDetails from './pages/bookDetails.js'
 import BookEdit from './pages/bookEdit.js'
+import BookAdd from './cmps/bookAdd.js'
 
 
 
@@ -37,6 +38,10 @@ const options = {
     {
         path:'/book/edit/:bookId?',
         component:BookEdit
+    },
+    {
+        path:'/book/add/',
+        component:BookAdd
     },
     {
       path: '/:catchAll(.*)',
