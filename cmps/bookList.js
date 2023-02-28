@@ -10,7 +10,7 @@ export default {
                     <RouterLink :to="'/book/'+book.id">Details</RouterLink> |
                     <RouterLink :to="'/book/edit/'+book.id">Edit</RouterLink> |
                     <button hidden @click="showDetails(book.id)">Details</button>
-                    <button @click="remove(book.id)">x</button>
+                    <button class="btn-remove" @click="remove(book.id)">x</button>
                 </li>
             </ul>
         </section>

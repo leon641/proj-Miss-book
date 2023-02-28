@@ -18,6 +18,8 @@
 @import 'cmps/bookIndex.css';
 @import 'cmps/bookFilter.css';
 @import 'cmps/bookList.css';
+@import 'cmps/ReviewPreview.css';
+@import 'cmps/AddReview.css';
 
 @import 'cmps/bookDetails.css';
 @import 'cmps/bookEdit.css';

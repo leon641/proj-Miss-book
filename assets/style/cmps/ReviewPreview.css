@@ -1,0 +1,18 @@
+.review-preview {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 10px;
+  gap: 5px;
+
+}
+
+.review-preview .stars {
+  font-size: 2rem;
+  color: #ffc700;
+}
+
+.review-preview .date {
+  flex-grow: 1;
+  text-align: right;
+}

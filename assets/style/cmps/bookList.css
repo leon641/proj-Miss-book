@@ -11,3 +11,7 @@
     padding: 10px;
     background-color: darkseagreen;
 }
+
+.btn-remove:hover {
+    cursor: pointer;
+}

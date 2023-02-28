@@ -1,4 +1,5 @@
 import { bookService } from '../services/book.service.js'
+import AddReview from '../cmps/AddReview.js'
 
 export default {
   props: ['book'],
@@ -14,10 +15,15 @@ export default {
             <h3><span>Language:</span> {{ book.language }}</h3>
             <h3><span>Price:</span> {{ book.listPrice.amount}}  {{book.listPrice.currencyCode }}</h3>
             <pre>{{ book.listPrice.isOnSale }}</pre>
-
-            
             <img :src="book.thumbnail" alt="">
-            <RouterLink to="/book">Back to list</RouterLink>
+            <nav>
+              <RouterLink :to="'/book/' + book.nextBookId">Next book</RouterLink> |
+              <RouterLink :to="'/book/' + book.prevBookId">Previous book</RouterLink> |
+                <hr />
+              <RouterLink to="/book">Back to list</RouterLink>
+              <AddReview  @save-review="saveReview"/>
+            </nav>
+            
         </section>
     `,
   data() {
@@ -26,10 +32,22 @@ export default {
     }
   },
   created() {
-    const { bookId } = this.$route.params
-    bookService.get(bookId).then((book) => (this.book = book))
+    this.loadBook()
+  },
+  computed: {
+    bookId() {
+      return this.$route.params.bookId
+    },
+  },
+  watch: {
+    bookId() {
+      this.loadBook()
+    },
   },
   methods: {
+    loadBook() {
+      bookService.get(this.bookId).then((book) => (this.book = book))
+    },
     formattedPrice() {
       const { amount, currencyCode } = this.book.listPrice
       return new Intl.NumberFormat('en', {
@@ -37,5 +55,8 @@ export default {
         currency: currencyCode,
       }).format(amount)
     },
+  },
+  components: {
+    AddReview,
   },
 }

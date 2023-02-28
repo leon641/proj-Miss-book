@@ -13,6 +13,8 @@ export const bookService = {
   remove,
   save,
   getEmptyBook: getEmptyBook,
+  addReview,
+  removeReview,
 }
 
 function query(filterBy = {}) {
@@ -30,6 +32,9 @@ function query(filterBy = {}) {
 
 function get(bookId) {
   return storageService.get(book_KEY, bookId)
+  .then(book =>{
+    return setNextPrevBookId(book)
+  }) 
 }
 
 function remove(bookId) {
@@ -76,4 +81,35 @@ function _createBook(bookName, bookPrice = 250) {
   const book = getEmptyBook(bookName, bookPrice)
   book.id = utilService.makeId()
   return book
+}
+
+function removeReview(bookId, reviewId) {
+  return get(bookId).then((book) => {
+    const idx = book.reviews.findIndex((review) => review.id === reviewId)
+    book.reviews.splice(idx, 1)
+    return save(book)
+  })
+}
+//new function cr
+
+function addReview(bookId, review) {
+  return get(bookId).then((book) => {
+    review.id = utilService.makeId(4)
+    if (!book.reviews) {
+      book.reviews = []
+    }
+    book.reviews.push(review)
+    return save(book)
+  })
+}
+
+function setNextPrevBookId(book) {
+  return storageService.query(book_KEY).then((books) => {
+    const bookIdx = books.findIndex((currBook) => currBook.id === book.id)
+      book.nextBookId = books[bookIdx + 1] ? books[bookIdx + 1].id : books[0].id
+      book.prevBookId = books[bookIdx - 1]
+          ? books[bookIdx - 1].id
+          : books[books.length - 1].id
+      return book
+  })
 }
