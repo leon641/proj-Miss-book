@@ -1,4 +1,4 @@
-import { googleBookService } from "../services/googleBook.service.js"
+import { googleBookService } from '../services/googleBook.service.js'
 
 export default {
   template: `
@@ -14,25 +14,25 @@ export default {
   </header>
   <ul v-if="books" v-for="book in books">
     <li>{{book.volumeInfo.title}}<button @click="onAddBook(book.id)">+</button></li>
+</ul>
   `,
   data() {
     return {
-      term : '',
-      book : null
+      term: '',
+      book: null,
     }
   },
-  methods : {
+  methods: {
     search() {
-        googleBookService.query(this.term)
-            .then(books => {
-                this.books = books
-            })
+      googleBookService.query(this.term).then((books) => {
+        this.books = books
+      })
     },
     onAddBook(bookId) {
-        const googleBook = this.books.find(book => book.id === bookId)
-                            console.log('googleBook', ({ ...googleBook }));
-                            googleBookService.addGoogleBook(googleBook)
-    }
+      const googleBook = this.books.find((book) => book.id === bookId)
+
+      googleBookService.addGoogleBook({ ...googleBook })
+    },
   },
   watch: {
     search() {
